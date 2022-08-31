@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <style>
+      body  {
+        background-image: conic-gradient( blue, lightblue);
+        }
+      </style>
+    <title>WeatherApp</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">WeatherApp</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                           
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+    <h1>Weather by Country & City </h1>
+   
+
+    <form  action="/" method="POST">
+      
+     </div>
+       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+              // Countries
+              var country_arr = new Array("Select Country","AUSTRALIA","INDIA","NEW ZEALAND","USA","UAE","MAURITIUS");
+      
+              $.each(country_arr, function (i, item) {
+                  $('#country').append($('<option>', {
+                      value: i,
+                      text : item,
+                  }, '</option>' ));
+              });
+      
+              // States
+              var s_a = new Array();
+              s_a[0]="Select State";
+              s_a[1]="Select State|NSW|QUEENSLAND|VICTORIA";
+              s_a[2]="Select State|ANDHRAPRADESH|KARNATAKA|TAMILNADU|DELHI|GOA|W-BENGAL|GUJARAT|MADHYAPRADESH|MAHARASHTRA|RAJASTHAN";
+              s_a[3]="Select State|AUCKLAND";
+              s_a[4]="Select State|NEWJERSEY|ILLINOIS";
+              s_a[5]="Select State|DUBAI";
+              s_a[6]="Select State|MAURITIUS";
+      
+              // Cities
+              var c_a = new Array();
+              c_a['NSW']="SYDNEY"
+              c_a['QUEENSLAND']="BRISBANE";
+              c_a['VICTORIA']="MELBOURNE";
+              c_a['ANDHRAPRADESH']="HYDERABAD";
+              c_a['KARNATAKA']="BANGALORE";
+              c_a['TAMILNADU']="CHENNAI";
+              c_a['DELHI']="DELHI";
+              c_a['GOA']="GOA";
+              c_a['W-BENGAL']="KOLKATA";
+              c_a['GUJARAT']="AHMEDABAD|BARODA|BHAVNAGAR|MEHSANA|RAJKOT|SURAT|UNA";
+              c_a['MADHYAPRADESH']="INDORE";
+              c_a['MAHARASHTRA']="MUMBAI|PUNE";
+              c_a['RAJASTHAN']="ABU";
+              c_a['AUCKLAND']="AUCKLAND";
+              c_a['NEWJERSEY']="EDISON";
+              c_a['ILLINOIS']="CHICAGO";
+              c_a['MAURITIUS']="MAURITIUS";
+              c_a['DUBAI']="DUBAI";
+      
+      
+              $('#country').change(function(){
+                  var c = $(this).val();
+                  var state_arr = s_a[c].split("|");
+                  $('#state').empty();
+                  $('#city').empty();
+                  if(c==0){
+                      $('#state').append($('<option>', {
+                          value: '0',
+                          text: 'Select State',
+                      }, '</option>'));
+                  }else {
+                      $.each(state_arr, function (i, item_state) {
+                          $('#state').append($('<option>', {
+                              value: item_state,
+                              text: item_state,
+                          }, '</option>'));
+                      });
+                  }
+                  $('#city').append($('<option>', {
+                      value: '0',
+                      text: 'Select City',
+                  }, '</option>'));
+              });
+      
+              $('#state').change(function(){
+                  var s = $(this).val();
+                  if(s=='Select State'){
+                      $('#city').empty();
+                      $('#city').append($('<option>', {
+                          value: '0',
+                          text: 'Select City',
+                      }, '</option>'));
+                  }
+                  var city_arr = c_a[s].split("|");
+                  $('#city').empty();
+      
+                  $.each(city_arr, function (j, item_city) {
+                      $('#city').append($('<option>', {
+                          value: item_city,
+                          text: item_city,
+                      }, '</option>'));
+                  });
+      
+      
+              });
+          });
+      </script>
+      </head>
+      <body>
+        
+         <label for="countries">Choose your Country:</label>
+        <span style="color: red !important; display: inline; float: none;">*</span>  
+      <select name="country" id="country"></select> <br>
+      <label for="States">State:</label>
+        <span style="color: red !important; display: inline; float: none;">*</span> 
+      <select name="state" id="state"></select> <br>
+      <label for="Cities">City:</label>
+        <span style="color: red !important; display: inline; float: none;">*</span> 
+      <select name="city" id="city"  class="form-control" name="city"></select>
+      <!--<label  class="form-label">Entr Your City</label>
+      <input type="text" class="form-control" name="city" aria-describedby="emailHelp"> -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
+
+
+
+      
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-12 col-xs-12 pt-5">
+            <div class="card border-0 p3 shadow-sm text-center">
+                <i class="fa fa-cloud" style="font-size:60px"></i>
+                <h3 class="text-muted">Current Weather for {{city}}</h3>
+                <h5 class="text-muted">Temperature: {{ temp }} °C</h5>
+                <h5 class="text-muted">Pressure: {{pressure }} hPa</h5>
+                <h5 class="text-muted">Humidity: {{ humidity }} %</h5>
+                <h5 class="text-muted">Sunrise: {{ sunrise }} AM</h5>
+                <h5 class="text-muted">Sunset: {{ sunset }} PM</h5>
+
+
+
+            </div>
+
+        </div>
+</div>
+</div>
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+   
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
