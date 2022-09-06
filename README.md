@@ -4,3 +4,4 @@ All the required modules are in requirements.txt file.
 Run the following command in the terminal to install the modules.
 pip install -r requirements.txt
 The final version of the weatherapp is on http://binu007.pythonanywhere.com.
+CI/CD Pipeline has been setup using GitHub Actions
